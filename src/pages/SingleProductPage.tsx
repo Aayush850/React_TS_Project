@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import { Product } from "../types/productType";
 import { Link } from "react-router-dom";
 
-const url = "https://fakestoreapi.com/products/"
+const url = "https://dummyjson.com/products/"
 
 function SingleProductPage() {
     const [product,setProduct] = useState<Product>();
@@ -38,7 +38,7 @@ function SingleProductPage() {
         <>
         <Link to="/">Back Home</Link>
          <div>
-            <img src={product.image} alt={product.title} />
+            <img src={product.images[0]} alt={product.title} />
             <h1>{product.title}</h1>
             <p>{product.description}</p>
             <p>Price: ${product.price}</p>
