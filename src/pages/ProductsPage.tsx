@@ -46,16 +46,16 @@ function ProductsPage() {
     }
   return (
 
-    <section className="products-section w-[90%] mx-auto">
-    <div className="grid grid-cols-3">{currentProdcuts.map((product,index)=>{
+    <section className="products-section w-[90%] my-8 mx-auto">
+    <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-2">{currentProdcuts.map((product,index)=>{
         const {id,title,images} = product
-        return <div key={index} className="border">
-            <img src={images[0]} alt={title} className="w-16"/>
-            <h1>{product.title}</h1>
-            <Link to={`/${id}`}>Learn More</Link>
+        return <div key={index} className="border flex flex-col justify-center items-center p-2">
+            <img src={images[0]} alt={title} className="h-48 w-48 object-cover"/>
+            <h1 className="text-lg">{product.title}</h1>
+            <Link to={`/${id}`} className="text-blue-600">Learn More</Link>
         </div>
     })}</div>
-        <Pagination totalPages={totalPages} setCurrentPage={setCurrentPage}/>
+        <Pagination totalPages={totalPages} setCurrentPage={setCurrentPage} currentPage = {currentPage}/>
     </section>
 
 
