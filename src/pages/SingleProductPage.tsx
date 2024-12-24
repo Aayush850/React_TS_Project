@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { Product } from "../types/productType";
 import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
+import Loader from "../components/Loader";
 
 const url = "https://dummyjson.com/products/"
 
@@ -52,7 +53,7 @@ function SingleProductPage() {
            
         </div>
         </main>
-       :<h1>Loading....</h1>}
+       :<Loader/>}
     </div>
   )
 }

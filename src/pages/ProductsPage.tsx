@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Product } from "../types/productType";
 import { Link } from "react-router-dom";
 import Pagination from "../components/Pagination";
-
+import Loader from "../components/Loader";
 const url:string = "https://dummyjson.com/products"
 
 function ProductsPage() {
@@ -39,7 +39,7 @@ function ProductsPage() {
     },[])
 
     if(loading){
-        return <h1>Loading....</h1>
+        return <Loader/>
     }
     if(error){
         return <h1>An error occured.</h1>
