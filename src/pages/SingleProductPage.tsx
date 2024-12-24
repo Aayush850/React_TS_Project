@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { Product } from "../types/productType";
 import { Link } from "react-router-dom";
+import { FaStar } from "react-icons/fa";
 
 const url = "https://dummyjson.com/products/"
 
@@ -35,16 +36,22 @@ function SingleProductPage() {
     <div>
 
         {product?
-        <>
-        <Link to="/">Back Home</Link>
-         <div>
-            <img src={product.images[0]} alt={product.title} />
-            <h1>{product.title}</h1>
+        <main className="mx-auto my-8 w-[90%]">
+        <Link to="/" className="bg-black text-white px-6 py-3 rounded hover:bg-gray-700 cursor-pointer inline-block">Back Home</Link>
+         <div className="flex items-center my-4 lg:flex-row md:flex-row flex-col gap-2 justify-center">
+            <div className="w-[40%]">
+            <img src={product.images[0]} alt={product.title}/>
+            </div>
+            <div className="w-[50%] space-y-2">
+            <h1 className="text-3xl font-bold">{product.title}</h1>
             <p>{product.description}</p>
-            <p>Price: ${product.price}</p>
-            <p>Rating: {product.rating.rate} {`(${product.rating.count})`}</p>
+            <p><strong>Category: </strong>{product.category}</p>
+            <p><strong>Price:</strong> $ {product.price}</p>
+            <p className="flex items-center gap-1"><strong>Rating:</strong> <FaStar className="text-yellow-300"/> {product.rating} </p>
+            </div>
+           
         </div>
-        </>
+        </main>
        :<h1>Loading....</h1>}
     </div>
   )

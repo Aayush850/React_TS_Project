@@ -5,5 +5,5 @@ export type Product = {
     description:string,
     category:string,
     images:string[],
-    rating:{rate:number,count:number}
+    rating:number,
 }
