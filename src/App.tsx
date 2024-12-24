@@ -1,8 +1,17 @@
-import React from 'react'
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import ProductsPage from "./pages/ProductsPage";
+import SingleProductPage from "./pages/SingleProductPage";
 
+const router = createBrowserRouter([{
+  path:"/",
+  element:<ProductsPage/>
+},{
+  path:"/:id",
+  element:<SingleProductPage/>
+}])
 const App = () => {
   return (
-    <h1 className='font-bold underline'>Hello World</h1>
+    <RouterProvider router={router}></RouterProvider>
   )
 }
 
