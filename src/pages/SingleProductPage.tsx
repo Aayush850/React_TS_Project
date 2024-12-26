@@ -1,31 +1,25 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
-import { Product } from "../types/productType";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom"
+import { Product } from "../types/types";
 import { FaStar } from "react-icons/fa";
 import Loader from "../components/Loader";
-
-const url:string = "/api/v1/products/"
+import { API_URL, fetchData } from "../api/api";
 
 function SingleProductPage() {
     const [product,setProduct] = useState<Product>();
     const [error,setError] = useState(false);
     const {id} = useParams();
+
     useEffect(()=>{
-        async function fetchSingleProduct(url:string){
+        async function loadData(){
             try {
-                const response = await fetch(url);
-                if(!response.ok){
-                    throw new Error("An error occured");
-                }
-                const data:Product = await response.json();
-                console.log(data);
+                const data = await fetchData<Product>(`${API_URL}${id}`);
                 setProduct(data);
             } catch (error) {
                 setError(true)
             }
         }
-        fetchSingleProduct(`${url}${id}`);
+       loadData();
     },[]);
 
     if(error){

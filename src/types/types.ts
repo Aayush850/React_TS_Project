@@ -10,3 +10,9 @@ export type Product = {
     count: number;
   };
 };
+
+export type ApiResponse = {
+  products: Product[];
+  numOfPages: number;
+  totalProducts: string;
+};
