@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
-import { Product } from "../types/productType";
+import { Product,ApiResponse } from "../types/types";
 import { Link } from "react-router-dom";
 import Pagination from "../components/Pagination";
 import Loader from "../components/Loader";
-const url:string = "/api/v1/products/"
+import { fetchData } from "../api/api";
+import { API_URL } from "../api/api";
+
 
 function ProductsPage() {
     const [loading,setLoading] = useState(false);
@@ -13,24 +15,19 @@ function ProductsPage() {
     const [totalPages,setTotalPages] = useState(0);    
 
     useEffect(()=>{
-        const fetchProdcuts = async (url:string)=>{
+        const loadData = async ()=>{
             setLoading(true);
             try {
-                const response = await fetch(`${url}?page=${currentPage}`);
-                if(!response.ok){
-                    throw new Error("An error occured while fetching the products.")
-                }
-                const data = await response.json();
+                const data = await fetchData<ApiResponse>(API_URL);
                 setProducts(data.products);
                 setTotalPages(data.numOfPages);
                 setLoading(false);
             } catch (error) {
                 setError(true);
                 setLoading(false);
-                console.log(error)
             }
         }
-        fetchProdcuts(url);
+       loadData()
     },[currentPage])
 
     if(loading){
@@ -43,9 +40,9 @@ function ProductsPage() {
   return (
 
     <section className="products-section w-[90%] my-8 mx-auto">
-    <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-2">{products.map((product,index)=>{
+    <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-2">{products.map((product)=>{
         const {id,title,image} = product
-        return <div key={index} className="border flex flex-col justify-center items-center p-2">
+        return <div key={id} className="border flex flex-col justify-center items-center p-2">
             <img src={image} alt={title} className="h-48 w-48 object-cover"/>
             <h1 className="text-lg">{product.title}</h1>
             <Link to={`/${id}`} className="text-blue-600">Learn More</Link>
