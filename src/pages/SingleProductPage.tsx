@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import Loader from "../components/Loader";
 
-const url = "/api/v1/products/"
+const url:string = "/api/v1/products/"
 
 function SingleProductPage() {
     const [product,setProduct] = useState<Product>();
@@ -39,7 +39,7 @@ function SingleProductPage() {
         {product?
         <main className="mx-auto my-8 w-[90%]">
         <Link to="/" className="bg-black text-white px-6 py-3 rounded hover:bg-gray-700 cursor-pointer inline-block">Back Home</Link>
-         <div className="flex items-center my-4 lg:flex-row md:flex-row flex-col gap-2 justify-center">
+         <div className="flex items-center my-4 lg:flex-row md:flex-row flex-col gap-16 justify-center">
             <div className="w-[40%]">
             <img src={product.image} alt={product.title}/>
             </div>
